@@ -1,0 +1,242 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-editorial: var(--font-editorial);
+}
+
+:root {
+  /* Neon cantina trio from the printed menu — used sparingly */
+  --flag-green:      #12808F;
+  --flag-green-dark: #0C5B66;
+  --flag-red:        #C21E63;
+  --flag-red-dark:   #99164E;
+  --flag-white:      #FFFFFF;
+
+  /* Brand palette pulled from the Taco Inn menu: midnight navy,
+     hot pink, electric cyan, gold */
+  --brand-primary:      #C21E63;        /* hot pink (darkened for contrast) */
+  --brand-primary-dark: #99164E;
+  --brand-accent:       #12808F;        /* electric cyan (darkened for text) */
+  --brand-accent-dark:  #0C5B66;
+  --brand-gold:         #C99845;        /* sunburst gold */
+  --brand-gold-dark:    #A87E2E;
+
+  /* Light theme surface system */
+  --brand-cream:        #FBF3EA;        /* warm off-white */
+  --brand-paper:        #F4E9DC;        /* warm cream — sections */
+  --brand-paper-deep:   #ECDCC6;        /* deeper warm — accent bands */
+  --brand-ink:          #232A45;        /* midnight navy text (menu bg color) */
+  --brand-ink-soft:     #46507A;        /* secondary text */
+
+  /* Legacy aliases (in case anything still references) */
+  --brand-night:        #FBF3EA;
+  --brand-charcoal:     #F4E9DC;
+  --brand-masa:         #F4E9DC;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+  -webkit-tap-highlight-color: transparent;
+  /* clip (not hidden) kills horizontal pan on iOS without breaking sticky nav */
+  overflow-x: clip;
+}
+
+body {
+  background: var(--brand-cream);
+  color: var(--brand-ink);
+  overflow-x: clip;
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display), system-ui, sans-serif;
+  letter-spacing: 0.005em;
+}
+
+.editorial,
+.font-editorial {
+  font-family: var(--font-editorial), Georgia, serif;
+  letter-spacing: -0.005em;
+}
+
+@media (max-width: 768px) {
+  input, select, textarea { font-size: 16px; }
+}
+
+/* ── A11y: focus + skip ──────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 3px solid var(--brand-primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  z-index: 100;
+  background: var(--brand-primary);
+  color: #FFFFFF;
+  padding: 12px 16px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: 8px;
+}
+.skip-link:focus { left: 8px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+::selection { background: var(--brand-primary); color: #fff; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--brand-cream); }
+::-webkit-scrollbar-thumb { background: var(--brand-primary-dark); border-radius: 99px; }
+
+/* ── Film grain overlay — softer on light bg ──────────────────────────────── */
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.9 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 180px 180px;
+  z-index: 10;
+}
+.grain-light::after { opacity: 0.04; mix-blend-mode: multiply; }
+
+/* ── Papel picado banner ──────────────────────────────────────────────────── */
+.papel-picado {
+  position: relative;
+  height: 36px;
+  width: 100%;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      var(--flag-green) 0 64px,
+      var(--brand-gold) 64px 128px,
+      var(--flag-red) 128px 192px
+    );
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 56' preserveAspectRatio='none'><defs><pattern id='p' x='0' y='0' width='96' height='56' patternUnits='userSpaceOnUse'><path d='M0 0 L96 0 L96 28 Q80 56 48 36 Q16 56 0 28 Z' fill='black'/><circle cx='24' cy='14' r='4' fill='white'/><circle cx='48' cy='10' r='3' fill='white'/><circle cx='72' cy='14' r='4' fill='white'/><circle cx='36' cy='24' r='2.5' fill='white'/><circle cx='60' cy='24' r='2.5' fill='white'/></pattern></defs><rect width='192' height='56' fill='url(%23p)'/></svg>");
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 56' preserveAspectRatio='none'><defs><pattern id='p' x='0' y='0' width='96' height='56' patternUnits='userSpaceOnUse'><path d='M0 0 L96 0 L96 28 Q80 56 48 36 Q16 56 0 28 Z' fill='black'/><circle cx='24' cy='14' r='4' fill='white'/><circle cx='48' cy='10' r='3' fill='white'/><circle cx='72' cy='14' r='4' fill='white'/><circle cx='36' cy='24' r='2.5' fill='white'/><circle cx='60' cy='24' r='2.5' fill='white'/></pattern></defs><rect width='192' height='56' fill='url(%23p)'/></svg>");
+  mask-size: 192px 56px;
+  -webkit-mask-size: 192px 56px;
+  mask-repeat: repeat-x;
+  -webkit-mask-repeat: repeat-x;
+  opacity: 0.7;
+  filter: drop-shadow(0 4px 8px rgba(122, 26, 42, 0.15));
+}
+.papel-picado.flipped { transform: scaleY(-1); }
+
+/* ── Flag stripe ─────────────────────────────────────────────────────────── */
+.flag-stripe {
+  background: linear-gradient(
+    to right,
+    var(--flag-green) 0 33.33%,
+    var(--brand-gold) 33.33% 66.66%,
+    var(--flag-red) 66.66% 100%
+  );
+}
+
+/* ── Cream paper section utility ──────────────────────────────────────────── */
+.section-cream {
+  background-color: var(--brand-cream);
+  color: var(--brand-ink);
+}
+.section-paper {
+  background-color: var(--brand-paper);
+  color: var(--brand-ink);
+  background-image:
+    radial-gradient(rgba(122, 26, 42, 0.045) 1px, transparent 1.5px),
+    radial-gradient(rgba(201, 152, 69, 0.06) 1px, transparent 1.5px);
+  background-size: 28px 28px, 36px 36px;
+  background-position: 0 0, 14px 18px;
+}
+.section-paper-deep {
+  background-color: var(--brand-paper-deep);
+  color: var(--brand-ink);
+}
+
+/* ── Legacy "section-quiet" + "masa-bg" → cream variants for back-compat ──── */
+.section-quiet {
+  background-color: var(--brand-paper);
+  color: var(--brand-ink);
+  background-image:
+    radial-gradient(rgba(122, 26, 42, 0.045) 1px, transparent 1.5px),
+    radial-gradient(rgba(201, 152, 69, 0.06) 1px, transparent 1.5px);
+  background-size: 28px 28px, 36px 36px;
+  background-position: 0 0, 14px 18px;
+}
+.masa-bg {
+  background-color: var(--brand-paper);
+  color: var(--brand-ink);
+  background-image:
+    radial-gradient(rgba(122, 26, 42, 0.04) 1px, transparent 1.5px),
+    radial-gradient(rgba(201, 152, 69, 0.06) 1px, transparent 1.5px);
+  background-size: 24px 24px, 32px 32px;
+  background-position: 0 0, 12px 16px;
+}
+
+/* ── Below-fold content-visibility hints ──────────────────────────────────── */
+#menu {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 2000px;
+}
+#order {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px;
+}
+
+/* Blog post body — readable long-form, marked HTML output. */
+.blog-prose {
+  font-family: var(--font-body), system-ui, sans-serif;
+  color: var(--brand-ink);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+.blog-prose h2 {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1.9rem;
+  line-height: 1.15;
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+  color: var(--brand-ink);
+}
+.blog-prose h3 {
+  font-weight: 800;
+  font-size: 1.25rem;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+  color: var(--brand-primary);
+}
+.blog-prose p { margin: 1rem 0; }
+.blog-prose ul, .blog-prose ol { margin: 1rem 0; padding-left: 1.4rem; }
+.blog-prose ul { list-style: disc; }
+.blog-prose ol { list-style: decimal; }
+.blog-prose li { margin: 0.4rem 0; }
+.blog-prose a { color: var(--brand-primary); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+.blog-prose strong { font-weight: 800; }
+.blog-prose blockquote {
+  border-left: 3px solid var(--brand-gold);
+  padding-left: 1rem;
+  font-style: italic;
+  color: var(--brand-ink-soft);
+  margin: 1.25rem 0;
+}

@@ -1,0 +1,9 @@
+node_modules
+.next
+out
+.trash
+*.tsbuildinfo
+.env
+.env.local
+.DS_Store
+.trash
