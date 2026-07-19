@@ -1,0 +1,5 @@
+:HL["/taco-inn/_next/static/chunks/17uxjgpjiek7x.css","style"]
+:HL["/taco-inn/logo.webp","image",{"fetchPriority":"high"}]
+:HL["/taco-inn/food/tacos-spread.webp","image",{"fetchPriority":"high"}]
+:HL["/taco-inn/logo-sm.webp","image"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"sM8MWLzpUmn6XolAO_wDU"}
