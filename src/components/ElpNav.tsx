@@ -38,7 +38,7 @@ export default function ElpNav() {
           <Link href="/" className="flex min-h-[44px] items-center gap-2" aria-label="Taco Inn home">
             <div className="relative h-10 w-16 sm:h-12 sm:w-20">
               <Image
-                src="/logo-sm.webp"
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/logo-sm.webp`}
                 alt="Taco Inn"
                 fill
                 priority
@@ -113,7 +113,7 @@ export default function ElpNav() {
           <div className="flex h-16 items-center justify-between border-b border-[var(--brand-ink)]/10 px-5">
             <div className="relative h-10 w-16">
               <Image
-                src="/logo-sm.webp"
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/logo-sm.webp`}
                 alt="Taco Inn"
                 fill
                 quality={92}

@@ -28,7 +28,7 @@ export default function ElpHero() {
           className="relative h-36 w-60 sm:h-44 sm:w-72 md:h-52 md:w-[22rem]"
         >
           <Image
-            src="/logo.webp"
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/logo.webp`}
             alt="Taco Inn — Comida Mexicana"
             fill
             priority

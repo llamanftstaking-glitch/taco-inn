@@ -14,7 +14,7 @@ export default function ElpFooter() {
           <div className="md:col-span-2">
             <div className="relative h-16 w-44 sm:h-20 sm:w-52">
               <Image
-                src="/logo.webp"
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/logo.webp`}
                 alt="Taco Inn — Comida Mexicana"
                 fill
                 quality={88}
